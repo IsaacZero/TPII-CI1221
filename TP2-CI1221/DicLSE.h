@@ -17,7 +17,6 @@
 class DicLSE {
 public:
     DicLSE();
-    DicLSE(const DicLSE& orig);
     virtual ~DicLSE();
 private:
 

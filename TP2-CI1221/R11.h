@@ -8,20 +8,13 @@
  * File:   R11.h
  * Author: Isaac
  *
- * Created on 7 de junio de 2018, 09:41 PM
+ * Created on 9 de junio de 2018, 08:15 PM
  */
 
 #ifndef R11_H
 #define R11_H
 
-class R11 {
-public:
-    R11();
-    R11(const R11& orig);
-    virtual ~R11();
-private:
 
-};
 
 #endif /* R11_H */
 

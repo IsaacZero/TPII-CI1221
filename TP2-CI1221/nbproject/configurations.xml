@@ -19,11 +19,9 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Algoritmos.cpp</itemPath>
-      <itemPath>DicLSE.cpp</itemPath>
       <itemPath>GDListaAdy.cpp</itemPath>
       <itemPath>GDMatrizAd.cpp</itemPath>
       <itemPath>GNDGD.cpp</itemPath>
-      <itemPath>R11.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -55,8 +53,6 @@
       </item>
       <item path="Algoritmos.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="DicLSE.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="DicLSE.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GDListaAdy.cpp" ex="false" tool="1" flavor2="0">
@@ -70,8 +66,6 @@
       <item path="GNDGD.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GNDGD.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="R11.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="R11.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -103,8 +97,6 @@
       </item>
       <item path="Algoritmos.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="DicLSE.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="DicLSE.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GDListaAdy.cpp" ex="false" tool="1" flavor2="0">
@@ -118,8 +110,6 @@
       <item path="GNDGD.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GNDGD.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="R11.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="R11.h" ex="false" tool="3" flavor2="0">
       </item>

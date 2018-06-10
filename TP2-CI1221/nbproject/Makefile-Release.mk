@@ -36,11 +36,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Algoritmos.o \
-	${OBJECTDIR}/DicLSE.o \
 	${OBJECTDIR}/GDListaAdy.o \
 	${OBJECTDIR}/GDMatrizAd.o \
 	${OBJECTDIR}/GNDGD.o \
-	${OBJECTDIR}/R11.o \
 	${OBJECTDIR}/main.o
 
 
@@ -73,11 +71,6 @@ ${OBJECTDIR}/Algoritmos.o: Algoritmos.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Algoritmos.o Algoritmos.cpp
 
-${OBJECTDIR}/DicLSE.o: DicLSE.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DicLSE.o DicLSE.cpp
-
 ${OBJECTDIR}/GDListaAdy.o: GDListaAdy.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -92,11 +85,6 @@ ${OBJECTDIR}/GNDGD.o: GNDGD.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GNDGD.o GNDGD.cpp
-
-${OBJECTDIR}/R11.o: R11.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/R11.o R11.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
