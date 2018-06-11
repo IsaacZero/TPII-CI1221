@@ -16,16 +16,7 @@
 #ifndef GDLISTAADY_H
 #define GDLISTAADY_H
 
-struct ListaAdy {
-
-    ListaAdy() : cantAdy(0), start(nullptr) {
-    }
-    ~ListaAdy();
-    ListaAdy *start;
-    int cantAdy;
-};
-
-struct Nodo {
+/*struct Nodo {
 
     Nodo() : siguiente(nullptr) {
     }
@@ -35,27 +26,105 @@ struct Nodo {
     }
     int elemento;
     Nodo *siguiente;
-    ListaAdy *adyacencia;
-};
 
-struct NodoAdy {
+    struct ListaAdy {
 
-    NodoAdy() : sig(nullptr) {
-    }
-    ~NodoAdy();
+        ListaAdy() : cantAdy(0), start(nullptr) {
+        }
+        ~ListaAdy();
 
-    NodoAdy(int e, Nodo *n) : peso(e), vertice(n), sig(nullptr) {
-    }
-    Nodo* vertice;
-    int peso;
-    NodoAdy *sig;
-};
+        struct NodoAdy {
+
+            NodoAdy() : sig(nullptr) {
+            }
+            ~NodoAdy();
+
+            NodoAdy(int e, Nodo *n) : peso(e), vertice(n), sig(nullptr) {
+            }
+            Nodo* vertice;
+            int peso;
+            NodoAdy *sig;
+        };
+        NodoAdy *start;
+        int cantAdy;
+    };
+    ListaAdy adyacencia;
+};*/
 
 class GDListaAdy {
 public:
 
+    struct Nodo{
+
+        Nodo() : siguiente(nullptr) {
+        }
+        ~Nodo(){
+        }
+        Nodo(int e) : elemento(e), siguiente(nullptr) {
+        }
+        int elemento;
+        Nodo *siguiente;
+
+        struct ListaAdy {
+
+            ListaAdy() : cantAdy(0), start(nullptr) {
+            }
+            ~ListaAdy(){
+            }
+            struct NodoAdy {
+
+                NodoAdy() : sig(nullptr) {
+                }
+                ~NodoAdy(){
+                }
+                NodoAdy(int e, Nodo *n) : peso(e), vertice(n), sig(nullptr) {
+                }
+                Nodo* vertice;
+                int peso;
+                NodoAdy *sig;
+            };
+            NodoAdy *start;
+            int cantAdy;
+        };
+        ListaAdy adyacencia;
+    };
+    /*
+    struct ListaAdy {
+
+        ListaAdy() : cantAdy(0), start(nullptr) {
+        }
+        ~ListaAdy();
+        nAdy *start;
+        int cantAdy;
+    };
+
+    struct Nodo {
+
+        Nodo() : siguiente(nullptr) {
+        }
+        ~Nodo();
+
+        Nodo(int e) : elemento(e), siguiente(nullptr) {
+        }
+        int elemento;
+        Nodo *siguiente;
+        ListaAdy adyacencia;
+    };
+
+    struct NodoAdy {
+
+        NodoAdy() : sig(nullptr) {
+        }
+        ~NodoAdy();
+
+        NodoAdy(int e, Nodo *n) : peso(e), vertice(n), sig(nullptr) {
+        }
+        Nodo* vertice;
+        int peso;
+        NodoAdy *sig;
+    };
+     */
     GDListaAdy();
-    GDListaAdy(const GDListaAdy& orig);
     virtual ~GDListaAdy();
 
     //EFE: Inicializa el Grafo.
@@ -79,7 +148,7 @@ public:
     bool vacio();
 
     //EFE: Agrega un vertice al grafo y lo retorna para trabajar con el mismo.
-    //REQ: El Grafo inicializado.
+    //REQ: El Grafo inicializado y la Etiqueta no existente en el Grafo.
     //MOD: El Grafo.
     Nodo* agregarVertice(int e);
 
@@ -144,36 +213,6 @@ public:
     int numVertices();
 
 private:
-    /*struct ListaAdy{
-        ListaAdy(): cantAdy(0), start(nullptr){
-        }
-        ~ListaAdy();
-        ListaAdy *start;
-        int cantAdy;
-    };
-    
-    struct Nodo{
-        Nodo(): siguiente(nodoNulo){
-        }
-        ~Nodo();
-        Nodo(int e): elemento(e), siguiente(nodoNulo){
-        }
-        int elemento;
-        Nodo *siguiente;
-        ListaAdy *adyacencia;
-    };
-    
-    struct NodoAdy{
-        NodoAdy(): sig(nullptr){
-        }
-        ~NodoAdy();
-        NodoAdy(int e, Nodo *n): peso(e), vertice(n), sig(nullptr){
-        }
-        Nodo* vertice;
-        int peso;
-        NodoAdy *sig;
-    };*/
-
     Nodo* inicio;
     int cantElem;
     static Nodo *nodoNulo;

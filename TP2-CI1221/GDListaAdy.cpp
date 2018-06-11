@@ -13,12 +13,9 @@
 
 #include "GDListaAdy.h"
 
-Nodo* GDListaAdy::nodoNulo = nullptr;
+GDListaAdy::Nodo* GDListaAdy::nodoNulo = nullptr;
 
 GDListaAdy::GDListaAdy() {
-}
-
-GDListaAdy::GDListaAdy(const GDListaAdy& orig) {
 }
 
 GDListaAdy::~GDListaAdy() {
@@ -44,10 +41,30 @@ bool GDListaAdy::vacio(){
     return empty;
 }
 
-Nodo* GDListaAdy::agregarVertice(int e){
+GDListaAdy::Nodo* GDListaAdy::agregarVertice(int e){
+    Nodo *nodo = new Nodo(e);
+    if(inicio == nodoNulo)
+        inicio = nodo;
+    else{
+        Nodo *n = inicio;
+        inicio = nodo;
+        nodo->siguiente = n;
+    }
+    cantElem++;
+    return nodo;
 }
 
 void GDListaAdy::eliminarVertice(Nodo* v){
+    if(inicio == v){
+        inicio = v->siguiente;
+        delete v;
+    }else{
+        Nodo *n = inicio;
+        while(n->siguiente != v)
+            n = n->siguiente;
+        n->siguiente = v->siguiente;
+        delete v;
+    }
 }
 
 void GDListaAdy::modificarEtiqueta(int newE, Nodo* v){
@@ -59,6 +76,15 @@ int GDListaAdy::etiqueta(Nodo* v){
 }
 
 void GDListaAdy::agregarArista(int p, Nodo* v1, Nodo* v2){
+    GDListaAdy::Nodo::ListaAdy::NodoAdy *nAdy = new GDListaAdy::Nodo::ListaAdy::NodoAdy(p, v2);
+    if(v1->adyacencia.start == nullptr)
+        v1->adyacencia.start = nAdy;
+    else{
+        GDListaAdy::Nodo::ListaAdy::NodoAdy *n = v1->adyacencia.start;
+        nAdy->sig = n;
+        v1->adyacencia.start = nAdy;
+    }
+    v1->adyacencia.cantAdy++;
 }
 
 void GDListaAdy::eliminarArista(Nodo* v1, Nodo* v2){
@@ -70,18 +96,18 @@ void GDListaAdy::modificarPeso(int newP, Nodo* v1, Nodo* v2){
 int GDListaAdy::peso(Nodo* v1, Nodo* v2){
 }
 
-Nodo* GDListaAdy::primerVertice(){
+GDListaAdy::Nodo* GDListaAdy::primerVertice(){
     return inicio;
 }
 
-Nodo* GDListaAdy::siguienteVertice(Nodo* v){
+GDListaAdy::Nodo* GDListaAdy::siguienteVertice(Nodo* v){
     return v->siguiente;
 }
 
-Nodo* GDListaAdy::primerVerticeAdy(Nodo* v1){
+GDListaAdy::Nodo* GDListaAdy::primerVerticeAdy(Nodo* v1){
 }
 
-Nodo* GDListaAdy::sigVerticeAdy(Nodo* v1, Nodo* v2){
+GDListaAdy::Nodo* GDListaAdy::sigVerticeAdy(Nodo* v1, Nodo* v2){
 }
 
 int GDListaAdy::numVertices(){
