@@ -178,7 +178,7 @@ public:
     void eliminarArista(Nodo* v1, Nodo* v2);
 
     //EFE: Cambia el peso de la arista entre V1 y V2.
-    //REQ: El Grafo inicializado.
+    //REQ: El Grafo inicializado y la existencia de la arista.
     //MOD: El peso de la Arista.
     void modificarPeso(int newP, Nodo* v1, Nodo* v2);
 

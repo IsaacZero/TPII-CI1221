@@ -27,9 +27,31 @@ void GDListaAdy::crear(){
 }
 
 void GDListaAdy::destruir(){
+    for(int i = 0; i < cantElem; i++){
+        Nodo *n = inicio;
+        for(int j = 0; j < n->adyacencia.cantAdy; j++){
+            Nodo::ListaAdy::NodoAdy *nAdy = n->adyacencia.start;
+            n->adyacencia.start = nAdy->sig;
+            delete nAdy;
+        }
+        inicio = n->siguiente;
+        delete n;
+    }
+    delete this;
 }
 
 void GDListaAdy::vaciar(){
+    for(int i = 0; i < cantElem; i++){
+        Nodo *n = inicio;
+        for(int j = 0; j < n->adyacencia.cantAdy; j++){
+            Nodo::ListaAdy::NodoAdy *nAdy = n->adyacencia.start;
+            n->adyacencia.start = nAdy->sig;
+            delete nAdy;
+        }
+        inicio = n->siguiente;
+        delete n;
+    }
+    cantElem = 0;
 }
 
 bool GDListaAdy::vacio(){
@@ -65,6 +87,7 @@ void GDListaAdy::eliminarVertice(Nodo* v){
         n->siguiente = v->siguiente;
         delete v;
     }
+    cantElem--;
 }
 
 void GDListaAdy::modificarEtiqueta(int newE, Nodo* v){
@@ -88,12 +111,47 @@ void GDListaAdy::agregarArista(int p, Nodo* v1, Nodo* v2){
 }
 
 void GDListaAdy::eliminarArista(Nodo* v1, Nodo* v2){
+    Nodo::ListaAdy::NodoAdy *nAdy = v1->adyacencia.start;
+    Nodo::ListaAdy::NodoAdy *nErased;
+    if(nAdy->vertice == v2){
+        v1->adyacencia.start = nAdy->sig;
+        delete nAdy;
+    }else{
+        while(nAdy->sig->vertice != v2){
+            nAdy = nAdy->sig;
+        }
+        nErased = nAdy->sig;
+        nAdy->sig = nErased->sig;
+        delete nErased;
+    }
+    v1->adyacencia.cantAdy--;
 }
 
 void GDListaAdy::modificarPeso(int newP, Nodo* v1, Nodo* v2){
+    bool changed = false;
+    Nodo::ListaAdy::NodoAdy *nAdy = v1->adyacencia.start;
+    while(!changed && nAdy != nullptr){
+        if(nAdy->vertice == v2){
+            nAdy->peso = newP;
+            changed = true;
+        }else{
+            nAdy = nAdy->sig;
+        }
+    }
 }
 
 int GDListaAdy::peso(Nodo* v1, Nodo* v2){
+    int p = 0;
+    bool encontrado = false;
+    Nodo::ListaAdy::NodoAdy *nAdy = v1->adyacencia.start;
+    while(!encontrado){
+        if(nAdy->vertice == v2){
+            p = nAdy->peso;
+            encontrado = true;
+        }else
+            nAdy = nAdy->sig;
+    }
+    return p;
 }
 
 GDListaAdy::Nodo* GDListaAdy::primerVertice(){
@@ -105,9 +163,25 @@ GDListaAdy::Nodo* GDListaAdy::siguienteVertice(Nodo* v){
 }
 
 GDListaAdy::Nodo* GDListaAdy::primerVerticeAdy(Nodo* v1){
+    return v1->adyacencia.start->vertice;
 }
 
 GDListaAdy::Nodo* GDListaAdy::sigVerticeAdy(Nodo* v1, Nodo* v2){
+    Nodo::ListaAdy::NodoAdy *nAdy = v1->adyacencia.start;
+    Nodo *nSig;
+    if (nAdy->vertice == v2)
+        nSig = nAdy->sig->vertice;
+    else{
+        bool found = false;
+        while(!found){
+            if(nAdy->vertice == v2){
+                nSig = nAdy->sig->vertice;
+                found = true;
+            }else
+                nAdy = nAdy->sig;
+        }
+    }
+    return nSig;
 }
 
 int GDListaAdy::numVertices(){
