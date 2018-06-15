@@ -8,6 +8,7 @@
       <itemPath>DicLSE.h</itemPath>
       <itemPath>GDListaAdy.h</itemPath>
       <itemPath>GDMatrizAd.h</itemPath>
+      <itemPath>GDirigido.h</itemPath>
       <itemPath>GNDGD.h</itemPath>
       <itemPath>R11.h</itemPath>
     </logicalFolder>
@@ -21,6 +22,7 @@
       <itemPath>Algoritmos.cpp</itemPath>
       <itemPath>GDListaAdy.cpp</itemPath>
       <itemPath>GDMatrizAd.cpp</itemPath>
+      <itemPath>GDirigido.cpp</itemPath>
       <itemPath>GNDGD.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -62,6 +64,10 @@
       <item path="GDMatrizAd.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GDMatrizAd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GDirigido.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GDirigido.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GNDGD.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -106,6 +112,10 @@
       <item path="GDMatrizAd.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="GDMatrizAd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GDirigido.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GDirigido.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="GNDGD.cpp" ex="false" tool="1" flavor2="0">
       </item>

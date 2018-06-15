@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Algoritmos.o \
 	${OBJECTDIR}/GDListaAdy.o \
 	${OBJECTDIR}/GDMatrizAd.o \
+	${OBJECTDIR}/GDirigido.o \
 	${OBJECTDIR}/GNDGD.o \
 	${OBJECTDIR}/main.o
 
@@ -80,6 +81,11 @@ ${OBJECTDIR}/GDMatrizAd.o: GDMatrizAd.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GDMatrizAd.o GDMatrizAd.cpp
+
+${OBJECTDIR}/GDirigido.o: GDirigido.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GDirigido.o GDirigido.cpp
 
 ${OBJECTDIR}/GNDGD.o: GNDGD.cpp
 	${MKDIR} -p ${OBJECTDIR}
