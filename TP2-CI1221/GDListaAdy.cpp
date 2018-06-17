@@ -37,7 +37,7 @@ void GDListaAdy::destruir(){
         inicio = n->siguiente;
         delete n;
     }
-    delete this;
+    cantElem = 0;
 }
 
 void GDListaAdy::vaciar(){
@@ -52,6 +52,7 @@ void GDListaAdy::vaciar(){
         delete n;
     }
     cantElem = 0;
+    inicio = nodoNulo;
 }
 
 bool GDListaAdy::vacio(){
