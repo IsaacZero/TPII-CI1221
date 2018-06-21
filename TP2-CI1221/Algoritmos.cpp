@@ -50,11 +50,52 @@ void Algoritmos::floyd(GDirigido grafo){
 }
 
 void Algoritmos::listarRPP(GDirigido grafo){
-    
+    if(!grafo.vacio()){
+        Vertice v = grafo.primerVertice();
+        DicV dicV;
+        dicV.crear();
+        while(v != nodoNulo){
+            if(!dicV.pertene(v))
+                this->listarRPPR(v, dicV, grafo);
+            v = grafo.siguienteVertice(v);
+        }
+        dicV.destruir();
+    }
+}
+
+void Algoritmos::listarRPPR(Vertice v, DicV& dicV, GDirigido grafo){
+    dicV.agregar(v);
+    cout << v->elemento << endl;
+    Vertice va = grafo.primerVerticeAdy(v);
+    while(va != nodoNulo){
+        if(!dicV.pertene(va))
+            this->listarRPPR(va, dicV, grafo);
+        va = grafo.sigVerticeAdy(v, va);
+    }
 }
 
 void Algoritmos::elimVertNA(Vertice v, GDirigido& grafo){
-    
+    Vertice v1 = grafo.primerVertice();
+    Vertice va1;
+    while(v1 != nodoNulo){
+        va1 = grafo.primerVerticeAdy(v1);
+        while(va1 != nodoNulo){
+            if(va1 == v){
+                grafo.eliminarArista(v1, va1);
+                va1 = nodoNulo;
+            }else
+                va1 = grafo.sigVerticeAdy(v1, va1);
+        }
+        v1 = grafo.siguienteVertice(v1);
+        if(v1 == v)
+            v1 = grafo.siguienteVertice(v1);
+    }
+    va1 = grafo.primerVerticeAdy(v);
+    while(va1 != nodoNulo){
+        grafo.eliminarArista(v, va1);
+        va1 = grafo.primerVerticeAdy(v);
+    }
+    grafo.eliminarVertice(v);
 }
 
 void Algoritmos::copiar(GDirigido G1, GDirigido& G2){
@@ -77,8 +118,9 @@ void Algoritmos::copiar(GDirigido G1, GDirigido& G2){
         while(v1 != nodoNulo){
             va1 = G1.primerVerticeAdy(v1);
             while(va1 != nodoNulo){
-                
+                G2.agregarArista(G1.peso(v1, va1), R11vert.imagen(v1), R11vert.imagen(va1));
             }
+            v1 = G1.siguienteVertice(v1);
         }
     }
 }

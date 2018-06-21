@@ -65,7 +65,8 @@ private:
     struct NodoDicc{
         NodoDicc(): sig(nodoNulo){
         }
-        ~NodoDicc();
+        ~NodoDicc(){
+        }
         NodoDicc(T newE): elem(newE), sig(nodoNulo){
         }
         NodoDicc *sig;

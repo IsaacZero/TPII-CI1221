@@ -19,7 +19,7 @@
 #include <iostream>
 #include <string>
 
-typedef DicLSE<Vertice> dicV;
+typedef DicLSE<Vertice> DicV;
 typedef R11<Vertice, Vertice> R11V;
 typedef R11<int, Vertice> R11PesoV;
 
@@ -55,6 +55,11 @@ public:
     //REQ:
     //MOD:
     void listarRPP(GDirigido grafo);
+    
+    //EFE: Lista el Grafo realizando un recorrido en profundidad primero, parte recursiva.
+    //REQ:
+    //MOD:
+    void listarRPPR(Vertice v, DicV &dicV, GDirigido grafo);
     
     //EFE: Elimina un vertice no aislado en el Grafo.
     //REQ: El vertice no aislado.
