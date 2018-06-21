@@ -13,6 +13,8 @@
 
 #include "GDMatrizAd.h"
 
+int GDMatrizAd::nodoNulo = -1;
+
 GDMatrizAd::GDMatrizAd() {
 }
 
@@ -23,20 +25,20 @@ GDMatrizAd::~GDMatrizAd() {
 }
 
 void GDMatrizAd::crear(){
-    ultimo = -1;
+    ultimo = nodoNulo;
 }
 
 void GDMatrizAd::destruir(){
-    ultimo = -1;
+    ultimo = nodoNulo;
 }
 
 void GDMatrizAd::vaciar(){
-    ultimo = -1;
+    ultimo = nodoNulo;
 }
 
 bool GDMatrizAd::vacio(){
     bool empty = false;
-    if(ultimo == -1)
+    if(ultimo == nodoNulo)
         empty = true;
     return empty;
 }
@@ -90,11 +92,17 @@ int GDMatrizAd::peso(int v1, int v2){
 }
 
 int GDMatrizAd::primerVertice(){
-    return 0;
+    int primV = nodoNulo;
+    if(ultimo != nodoNulo)
+        primV = 0;
+    return primV;
 }
 
 int GDMatrizAd::siguienteVertice(int v){
-    return v+1;
+    int sigVert = nodoNulo;
+    if(v < ultimo)
+        sigVert = v+1;
+    return sigVert;
 }
 
 int GDMatrizAd::primerVerticeAdy(int v1){
@@ -106,6 +114,8 @@ int GDMatrizAd::primerVerticeAdy(int v1){
         else
             vertAdy++;
     }
+    if(vertAdy > ultimo && !found)
+        vertAdy = nodoNulo;
     return vertAdy;
 }
 
@@ -118,9 +128,27 @@ int GDMatrizAd::sigVerticeAdy(int v1, int v2){
         else
             vertAdy++;
     }
+    if(vertAdy > ultimo && !found)
+        vertAdy = nodoNulo;
     return vertAdy;
 }
 
 int GDMatrizAd::numVertices(){
     return ultimo + 1;
+}
+
+int GDMatrizAd::numAristas(int v){
+    int cantAr = 0;
+    for(int i = 0; i <= ultimo; i++){
+        if(matrizAdy[v][i] > 0)
+            cantAr++;
+    }
+    return cantAr;
+}
+
+bool GDMatrizAd::existeArista(int v1, int v2){
+    bool existe = false;
+    if(matrizAdy[v1][v2] != 0)
+        existe = true;
+    return existe;
 }

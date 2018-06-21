@@ -88,3 +88,11 @@ Vertice GDirigido::sigVerticeAdy(Vertice v1, Vertice v2){
 int GDirigido::numVertices(){
     return grafo.numVertices();
 }
+
+int GDirigido::numAristas(Vertice v){
+    return grafo.numAristas(v);
+}
+
+bool GDirigido::existeArista(Vertice v1, Vertice v2){
+    return grafo.existeArista(v1, v2);
+}

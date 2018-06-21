@@ -106,12 +106,22 @@ public:
     //MOD:
     int numVertices();
     
+    //EFE: Retorna la cantidad de vertices adyacentes de V.
+    //REQ: El Grafo Inicializado y V perteneciente en el grafo.
+    //MOD:
+    int numAristas(int v);
+    
+    //EFE: Retorna true si v1 tiene una arista hacia v2 y false en caso contrario.
+    //REQ: El Grafo Inicializado y V1 y V2 perteneciente en el grafo.
+    //MOD:
+    bool existeArista(int v1, int v2);
+    
 private:
     
     int ultimo;
     int vecVert[MAX];
     int matrizAdy[MAX][MAX];
-    
+    static int nodoNulo;
 };
 
 #endif /* GDMATRIZAD_H */

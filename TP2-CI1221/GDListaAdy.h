@@ -88,42 +88,7 @@ public:
         };
         ListaAdy adyacencia;
     };
-    /*
-    struct ListaAdy {
-
-        ListaAdy() : cantAdy(0), start(nullptr) {
-        }
-        ~ListaAdy();
-        nAdy *start;
-        int cantAdy;
-    };
-
-    struct Nodo {
-
-        Nodo() : siguiente(nullptr) {
-        }
-        ~Nodo();
-
-        Nodo(int e) : elemento(e), siguiente(nullptr) {
-        }
-        int elemento;
-        Nodo *siguiente;
-        ListaAdy adyacencia;
-    };
-
-    struct NodoAdy {
-
-        NodoAdy() : sig(nullptr) {
-        }
-        ~NodoAdy();
-
-        NodoAdy(int e, Nodo *n) : peso(e), vertice(n), sig(nullptr) {
-        }
-        Nodo* vertice;
-        int peso;
-        NodoAdy *sig;
-    };
-     */
+    
     GDListaAdy();
     virtual ~GDListaAdy();
 
@@ -211,7 +176,17 @@ public:
     //REQ: El Grafo Inicializado.
     //MOD:
     int numVertices();
-
+    
+    //EFE: Retorna la cantidad de vertices adyacentes de V.
+    //REQ: El Grafo Inicializado y V perteneciente en el grafo.
+    //MOD:
+    int numAristas(Nodo* v);
+    
+    //EFE: Retorna true si v1 tiene una arista hacia v2 y false en caso contrario.
+    //REQ: El Grafo Inicializado y V1 y V2 perteneciente en el grafo.
+    //MOD:
+    bool existeArista(Nodo* v1, Nodo* v2);
+    
 private:
     Nodo* inicio;
     int cantElem;

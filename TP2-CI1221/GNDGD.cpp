@@ -91,3 +91,11 @@ Vertice GNDGD::sigVerticeAdy(Vertice v1, Vertice v2){
 int GNDGD::numVertices(){
     return grafoND.numVertices();
 }
+
+int GNDGD::numAristas(Vertice v){
+    return grafoND.numAristas(v);
+}
+
+bool GNDGD::existeArista(Vertice v1, Vertice v2){
+    return grafoND.existeArista(v1, v2);
+}

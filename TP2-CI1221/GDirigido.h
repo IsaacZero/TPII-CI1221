@@ -112,7 +112,17 @@ public:
     //REQ: El Grafo Inicializado.
     //MOD:
     int numVertices();
-
+    
+    //EFE: Retorna la cantidad de vertices adyacentes de V.
+    //REQ: El Grafo Inicializado y V perteneciente en el grafo.
+    //MOD:
+    int numAristas(Vertice v);
+    
+    //EFE: Retorna true si v1 tiene una arista hacia v2 y false en caso contrario.
+    //REQ: El Grafo Inicializado y V1 y V2 perteneciente en el grafo.
+    //MOD:
+    bool existeArista(Vertice v1, Vertice v2);
+    
 private:
     Grafo grafo;
 };

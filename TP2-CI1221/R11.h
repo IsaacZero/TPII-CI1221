@@ -97,7 +97,8 @@ private:
 
         NodoRel() : sig(nodoNull) {
         }
-        ~NodoRel();
+        ~NodoRel(){
+        }
 
         NodoRel(B e1, Y e2) : relacion(e1, e2), sig(nodoNull) {
         }
@@ -110,7 +111,7 @@ private:
 };
 
 template <typename V, typename T>
-R11::NodoRel<V, T>* R11::nodoNull = nullptr;
+R11<V, T>::NodoRel<V, T>* R11<V, T>::nodoNull = nullptr;
 
 template <typename V, typename T>
 R11<V, T>::R11() {
@@ -129,7 +130,7 @@ void R11<V, T>::crear() {
 template <typename V, typename T>
 void R11<V, T>::destruir() {
     while(inicio != nodoNull){
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         inicio = inicio->sig;
         delete n;
     }
@@ -139,7 +140,7 @@ void R11<V, T>::destruir() {
 template <typename V, typename T>
 void R11<V, T>::vaciar() {
     while(inicio != nodoNull){
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         inicio = inicio->sig;
         delete n;
     }
@@ -165,15 +166,15 @@ void R11<V, T>::agregarRelacion(V e1, T e2) {
 template <typename V, typename T>
 void R11<V, T>::eliminarRelacion(V e1, T e2) {
     if(inicio->relacion.first == e1){
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         inicio = inicio->sig;
         delete n;
     }else{
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while(n->sig->relacion.first != e1){
             n = n->sig;
         }
-        NodoRel *nSig = n->sig;
+        NodoRel<V, T> *nSig = n->sig;
         n->sig = nSig->sig;
         delete nSig;
     }
@@ -185,7 +186,7 @@ void R11<V, T>::modificarImagen(V e1, T newE) {
         inicio->relacion.second = newE;
     else {
         bool found = false;
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while (!found && n != nodoNull) {
             if (n->relacion.first == e1) {
                 n->relacion.second = newE;
@@ -204,7 +205,7 @@ bool R11<V, T>::existeRelacion(V e1, T e2) {
             relate = true;
     } else {
         bool found = false;
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while (!found && n != nodoNull) {
             if (n->relacion.first == e1) {
                 if (n->relacion.second == e2){
@@ -227,7 +228,7 @@ T R11<V, T>::imagen(V e) {
         img = inicio->relacion.second;
     else{
         bool found = false;
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while(!found){
             if(n->relacion.first == e){
                 img = n->relacion.second;
@@ -246,7 +247,7 @@ V R11<V, T>::preImagen(T e) {
         pimg = inicio->relacion.first;
     else{
         bool found = false;
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while(!found){
             if(n->relacion.second == e){
                 pimg = n->relacion.first;
@@ -265,7 +266,7 @@ bool R11<V, T>::estaEnDominio(V e) {
         encontrado = true;
     else{
         bool found = false;
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while(!found && n != nodoNull){
             if(n->relacion.first == e){
                 encontrado = true;
@@ -284,7 +285,7 @@ bool R11<V, T>::estaEnCodominio(T e) {
         encontrado = true;
     else{
         bool found = false;
-        NodoRel *n = inicio;
+        NodoRel<V, T> *n = inicio;
         while(!found && n != nodoNull){
             if(n->relacion.second == e){
                 encontrado = true;

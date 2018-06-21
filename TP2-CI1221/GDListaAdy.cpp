@@ -188,3 +188,19 @@ GDListaAdy::Nodo* GDListaAdy::sigVerticeAdy(Nodo* v1, Nodo* v2){
 int GDListaAdy::numVertices(){
     return cantElem;
 }
+
+int GDListaAdy::numAristas(Nodo* v){
+    return v->adyacencia.cantAdy;
+}
+
+bool GDListaAdy::existeArista(Nodo* v1, Nodo* v2){
+    bool existe = false;
+    Nodo::ListaAdy::NodoAdy* vAdy = v1->adyacencia.start;
+    while(vAdy != nullptr && !existe){
+        if(vAdy->vertice == v2)
+            existe = true;
+        else
+            vAdy = vAdy->sig;
+    }
+    return existe;
+}

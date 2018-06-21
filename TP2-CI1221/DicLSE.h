@@ -72,9 +72,9 @@ private:
         T elem;
     };
     
-    static NodoDicc* nodoNulo;
+    static NodoDicc<V>* nodoNulo;
     int cantElem;
-    NodoDicc* inicio;
+    NodoDicc<V>* inicio;
 };
 
 template < typename V >
@@ -174,7 +174,7 @@ bool DicLSE<V>::pertene(V elemento){
 }
 
 template <typename V>
-int DicLSE<V>::pertene(V elem){
+int DicLSE<V>::numElem(){
     return cantElem;
 }
 #endif /* DICLSE_H */
