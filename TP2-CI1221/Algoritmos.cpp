@@ -58,7 +58,29 @@ void Algoritmos::elimVertNA(Vertice v, GDirigido& grafo){
 }
 
 void Algoritmos::copiar(GDirigido G1, GDirigido& G2){
-    
+    //Relaciones 1:1 con los vertices iguales de G1 y G2 similar a iguales.
+    if(G1.numVertices() == 0)
+        G2.vaciar();
+    else{
+        G2.vaciar();
+        R11V R11vert;
+        R11vert.crear();
+        Vertice v1 = G1.primerVertice();
+        Vertice v2;
+        while (v1 != nodoNulo){
+            v2 = G2.agregarVertice(G1.etiqueta(v1));
+            R11vert.agregarRelacion(v1, v2);
+            v1 = G1.siguienteVertice(v1);
+        }
+        v1 = G1.primerVertice();
+        Vertice va1;
+        while(v1 != nodoNulo){
+            va1 = G1.primerVerticeAdy(v1);
+            while(va1 != nodoNulo){
+                
+            }
+        }
+    }
 }
 
 bool Algoritmos::iguales(GDirigido G1, GDirigido G2){
