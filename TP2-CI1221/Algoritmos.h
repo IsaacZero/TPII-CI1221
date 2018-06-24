@@ -22,6 +22,7 @@
 typedef DicLSE<Vertice> DicV;
 typedef R11<Vertice, Vertice> R11V;
 typedef R11<int, Vertice> R11PesoV;
+#define INFINITO 1000000
 
 #ifndef ALGORITMOS_H
 #define ALGORITMOS_H

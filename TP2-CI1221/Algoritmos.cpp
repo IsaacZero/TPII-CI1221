@@ -46,7 +46,61 @@ void Algoritmos::dijkstra(Vertice V, GDirigido grafo){
 }
 
 void Algoritmos::floyd(GDirigido grafo){
+    int matriz[grafo.numVertices()][grafo.numVertices()];
+    R11PesoV r11;
+    Vertice v = grafo.primerVertice();
+    Vertice va;
+    int fila = 0;
+    int columna = 0;
+    for(int i = 0; i < grafo.numVertices(); i++){
+        r11.agregarRelacion(i, v);
+        v = grafo.siguienteVertice(v);
+    }
+    v = grafo.primerVertice();
+    va = grafo.primerVerticeAdy(v);
+    for(int i = 0; i < grafo.numVertices(); i++){
+        for( int j = 0; j < grafo.numVertices(); j++){
+            if(i == j)
+                matriz[i][j] = 0;
+            else{
+                matriz[i][j] = INFINITO;
+                if(va != nodoNulo){
+                    fila = r11.preImagen(v);
+                    columna = r11.preImagen(va);
+                    matriz[fila][columna] = grafo.peso(v, va);
+                    va = grafo.sigVerticeAdy(v, va);
+                }
+            }
+        }
+        v = grafo.siguienteVertice(v);
+    }
     
+    for (int k = 0; k < grafo.numVertices(); k++){
+        for (int i = 0; i < grafo.numVertices(); i++){
+            for ( int j = 0; j < grafo.numVertices(); j++){
+                if(matriz[i][k] + matriz[k][j] < matriz[i][j])
+                    matriz[i][j] = matriz[i][k] + matriz[k][j];
+            }
+        }
+    }
+    
+    v = grafo.primerVertice();
+    cout << "Posiciones en la Matriz de los vertices" << endl;
+    while (v != nodoNulo){
+        cout << r11.preImagen(v) << "->" << endl;
+        v = grafo.siguienteVertice(v);
+    }
+    
+    for(int i = 0; i < grafo.numVertices(); i++){
+        for( int j = 0; j < grafo.numVertices(); j++){
+            cout << "(";
+            if(matriz[i][j] == INFINITO)
+                cout << "INF ";
+            else
+                cout << matriz[i][j] << " ";
+        }
+        cout << ")" << endl;
+    }
 }
 
 void Algoritmos::listarRPP(GDirigido grafo){
