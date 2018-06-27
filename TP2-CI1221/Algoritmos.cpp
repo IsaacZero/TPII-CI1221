@@ -41,7 +41,19 @@ Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido grafo){
     return v;
 }
 
-void Algoritmos::dijkstra(Vertice V, GDirigido grafo){
+void Algoritmos::dijkstra(Vertice V, GDirigido grafo){//R11
+    R11PesoV r11;
+    r11.crear();
+    Vertice vIter = grafo.primerVertice();
+    Vertice vAdy;
+    while(vIter != nodoNulo){
+        if(vIter != V){
+            r11.agregarRelacion(INFINITO, vIter);
+            vIter = grafo.siguienteVertice(vIter);
+        }else
+            r11.agregarRelacion(0, V);
+    }
+    //Doble for, recorre el grafo y hacer el escoger minima distancia.
     
 }
 
@@ -223,10 +235,10 @@ bool Algoritmos::iguales(GDirigido G1, GDirigido G2){
 
 //ALGORITMOS GRAFO NO DIRIGIDO
 
-void Algoritmos::prim(GNDGD grafo){
+void Algoritmos::prim(GNDGD grafo){//R11
     
 }
 
-void Algoritmos::vendedor(GNDGD grafo){
+void Algoritmos::vendedor(GNDGD grafo){//Diccionario
     
 }
