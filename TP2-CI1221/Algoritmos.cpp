@@ -41,20 +41,54 @@ Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido grafo){
     return v;
 }
 
+Vertice Algoritmos::min(Vertice V, GDirigido grafo){
+    Vertice vMenor = grafo.primerVerticeAdy(V);
+    Vertice vIter = grafo.primerVerticeAdy(V);
+    while(vIter != nodoNulo){
+        if(grafo.peso(V, vIter) < grafo.peso(V, vMenor)){
+            vMenor = vIter;
+            vIter = grafo.sigVerticeAdy(V, vIter);
+        }else{
+            vIter = grafo.sigVerticeAdy(V, vIter);
+        }
+    }
+    return vMenor;
+}
+
 void Algoritmos::dijkstra(Vertice V, GDirigido grafo){//R11
     R11PesoV r11;
     r11.crear();
     Vertice vIter = grafo.primerVertice();
     Vertice vAdy;
+    DicV diccNoVisitados;
+    diccNoVisitados.crear();
     while(vIter != nodoNulo){
-        if(vIter != V){
-            r11.agregarRelacion(INFINITO, vIter);
+        if(vIter != V && !grafo.existeArista(V, vIter)){
+            r11.agregarRelacion(vIter, INFINITO);
             vIter = grafo.siguienteVertice(vIter);
-        }else
-            r11.agregarRelacion(0, V);
+            diccNoVisitados.agregar(vIter);
+        }else if(vIter != V && grafo.existeArista(V, vIter)){
+            r11.agregarRelacion(vIter, grafo.peso(V, vIter));
+            vIter = grafo.siguienteVertice(vIter);
+            diccNoVisitados.agregar(vIter);
+        }else{
+            r11.agregarRelacion(V, 0);
+            vIter = grafo.siguienteVertice(vIter);
+        }
     }
-    //Doble for, recorre el grafo y hacer el escoger minima distancia.
-    
+    vIter = V;
+    for(int i = 0; i < grafo.numVertices()- 1; i++){
+        //Cambiar todo que no era asi:v
+        vIter = this->min(vIter, grafo);
+        diccNoVisitados.agregar(vIter);
+        vAdy = grafo.primerVerticeAdy(vIter);
+        while(vAdy != nodoNulo){
+            if(!diccNoVisitados.pertene(vAdy) && (r11.imagen(vIter) + grafo.peso(vIter, vAdy) < r11.imagen(vAdy)))
+                r11.modificarImagen(vAdy, r11.imagen(vIter) + grafo.peso(vIter, vAdy));
+            else
+                vAdy = grafo.sigVerticeAdy(vIter, vAdy);
+        }
+    }
 }
 
 void Algoritmos::floyd(GDirigido grafo){
@@ -65,7 +99,7 @@ void Algoritmos::floyd(GDirigido grafo){
     int fila = 0;
     int columna = 0;
     for(int i = 0; i < grafo.numVertices(); i++){
-        r11.agregarRelacion(i, v);
+        r11.agregarRelacion(v, i);
         v = grafo.siguienteVertice(v);
     }
     v = grafo.primerVertice();
@@ -77,8 +111,8 @@ void Algoritmos::floyd(GDirigido grafo){
             else{
                 matriz[i][j] = INFINITO;
                 if(va != nodoNulo){
-                    fila = r11.preImagen(v);
-                    columna = r11.preImagen(va);
+                    fila = r11.imagen(v);
+                    columna = r11.imagen(va);
                     matriz[fila][columna] = grafo.peso(v, va);
                     va = grafo.sigVerticeAdy(v, va);
                 }
@@ -99,7 +133,7 @@ void Algoritmos::floyd(GDirigido grafo){
     v = grafo.primerVertice();
     cout << "Posiciones en la Matriz de los vertices" << endl;
     while (v != nodoNulo){
-        cout << r11.preImagen(v) << "->" << endl;
+        cout << r11.imagen(v) << "->" << endl;
         v = grafo.siguienteVertice(v);
     }
     

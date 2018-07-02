@@ -21,7 +21,7 @@
 
 typedef DicLSE<Vertice> DicV;
 typedef R11<Vertice, Vertice> R11V;
-typedef R11<int, Vertice> R11PesoV;
+typedef R11<Vertice, int> R11PesoV;
 #define INFINITO 1000000
 
 #ifndef ALGORITMOS_H
@@ -41,6 +41,11 @@ public:
     //REQ:
     //MOD:
     Vertice buscarEtiq(int etiqueta, GDirigido grafo);
+    
+    //EFE: Retorna el vertice adyacente con menor peso.
+    //REQ: V incluido en el grafo.
+    //MOD: 
+    Vertice min(Vertice V, GDirigido grafo);
     
     //EFE: Realiza Dijkstra para encontrar el camino más corto entre el vértice y los demás.
     //REQ: V incluido en el grafo.
