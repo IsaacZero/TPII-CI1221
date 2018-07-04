@@ -45,7 +45,7 @@ public:
     //EFE: Retorna el vertice adyacente con menor peso.
     //REQ: V incluido en el grafo.
     //MOD: 
-    Vertice min(Vertice V, GDirigido grafo);
+    Vertice min(DicV dicc, R11PesoV r11, GDirigido grafo);
     
     //EFE: Realiza Dijkstra para encontrar el camino más corto entre el vértice y los demás.
     //REQ: V incluido en el grafo.

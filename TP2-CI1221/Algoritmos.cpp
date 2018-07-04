@@ -41,18 +41,17 @@ Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido grafo){
     return v;
 }
 
-Vertice Algoritmos::min(Vertice V, GDirigido grafo){
-    Vertice vMenor = grafo.primerVerticeAdy(V);
-    Vertice vIter = grafo.primerVerticeAdy(V);
-    while(vIter != nodoNulo){
-        if(grafo.peso(V, vIter) < grafo.peso(V, vMenor)){
-            vMenor = vIter;
-            vIter = grafo.sigVerticeAdy(V, vIter);
-        }else{
-            vIter = grafo.sigVerticeAdy(V, vIter);
-        }
+Vertice Algoritmos::min(DicV dicc, R11PesoV r11, GDirigido grafo){
+    Vertice iter = grafo.primerVertice();
+    Vertice min = iter;
+    while (iter != nodoNulo){
+        if(r11.imagen(iter) < r11.imagen(min) && !dicc.pertene(iter)){
+            min = iter;
+            iter = grafo.siguienteVertice(iter);
+        }else
+            iter = grafo.siguienteVertice(iter);
     }
-    return vMenor;
+    return min;
 }
 
 void Algoritmos::dijkstra(Vertice V, GDirigido grafo){//R11
@@ -60,35 +59,35 @@ void Algoritmos::dijkstra(Vertice V, GDirigido grafo){//R11
     r11.crear();
     Vertice vIter = grafo.primerVertice();
     Vertice vAdy;
-    DicV diccNoVisitados;
-    diccNoVisitados.crear();
+    DicV diccVisitados;
+    diccVisitados.crear();
     while(vIter != nodoNulo){
         if(vIter != V && !grafo.existeArista(V, vIter)){
             r11.agregarRelacion(vIter, INFINITO);
             vIter = grafo.siguienteVertice(vIter);
-            diccNoVisitados.agregar(vIter);
         }else if(vIter != V && grafo.existeArista(V, vIter)){
             r11.agregarRelacion(vIter, grafo.peso(V, vIter));
             vIter = grafo.siguienteVertice(vIter);
-            diccNoVisitados.agregar(vIter);
         }else{
             r11.agregarRelacion(V, 0);
             vIter = grafo.siguienteVertice(vIter);
+            diccVisitados.agregar(V);
         }
     }
-    vIter = V;
-    for(int i = 0; i < grafo.numVertices()- 1; i++){
+    
+    for(int i = 1; i < grafo.numVertices()- 1; i++){
         //Cambiar todo que no era asi:v
-        vIter = this->min(vIter, grafo);
-        diccNoVisitados.agregar(vIter);
+        vIter = this->min(diccVisitados, r11, grafo);
+        diccVisitados.agregar(vIter);
         vAdy = grafo.primerVerticeAdy(vIter);
         while(vAdy != nodoNulo){
-            if(!diccNoVisitados.pertene(vAdy) && (r11.imagen(vIter) + grafo.peso(vIter, vAdy) < r11.imagen(vAdy)))
+            if(!diccVisitados.pertene(vAdy) && (r11.imagen(vIter) + grafo.peso(vIter, vAdy) < r11.imagen(vAdy)))
                 r11.modificarImagen(vAdy, r11.imagen(vIter) + grafo.peso(vIter, vAdy));
             else
                 vAdy = grafo.sigVerticeAdy(vIter, vAdy);
         }
     }
+    
 }
 
 void Algoritmos::floyd(GDirigido grafo){
