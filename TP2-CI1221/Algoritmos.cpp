@@ -87,7 +87,7 @@ void Algoritmos::dijkstra(Vertice V, GDirigido grafo){//R11
                 vAdy = grafo.sigVerticeAdy(vIter, vAdy);
         }
     }
-    
+    //Imprimir
 }
 
 void Algoritmos::floyd(GDirigido grafo){
@@ -269,7 +269,57 @@ bool Algoritmos::iguales(GDirigido G1, GDirigido G2){
 //ALGORITMOS GRAFO NO DIRIGIDO
 
 void Algoritmos::prim(GNDGD grafo){//R11
-    
+    R11V r11;
+    DicV dicVisitado;
+    r11.crear();
+    dicVisitado.crear();
+    Vertice vIter = grafo.primerVertice();
+    Vertice vAdy;
+    Vertice min = vIter;
+    while(vIter != nodoNulo){
+        if(grafo.etiqueta(vIter) < grafo.etiqueta(min)){
+            min = vIter;
+            r11.agregarRelacion(vIter, nodoNulo);
+            vIter = grafo.siguienteVertice(vIter);
+        }else{
+            vIter = grafo.siguienteVertice(vIter);
+            r11.agregarRelacion(vIter, nodoNulo);
+        }
+    }
+    dicVisitado.agregar(min);
+    vIter = grafo.primerVerticeAdy(min);
+    while(vIter != nodoNulo){
+        r11.modificarImagen(vIter, min);
+        vIter = grafo.sigVerticeAdy(min, vIter);
+    }
+    for(int i = 1; i < grafo.numVertices(); i++){
+        vIter = grafo.primerVertice();
+        min = grafo.primerVerticeAdy(min);
+        //ciclo para encontrar el vertice con la minima arista.
+        while (vIter != nodoNulo){
+            if(r11.imagen(vIter) != nodoNulo && !dicVisitado.pertene(vIter)){
+                if(grafo.peso(r11.imagen(vIter), vIter) <  grafo.peso(r11.imagen(min), min)){
+                    min = vIter;
+                    vIter = grafo.siguienteVertice(vIter);
+                }else
+                    vIter = grafo.siguienteVertice(vIter);
+            }else
+                vIter = grafo.siguienteVertice(vIter);
+        }
+        dicVisitado.agregar(min);
+        vAdy = grafo.primerVerticeAdy(min);
+        while(vAdy != nodoNulo){
+            if(r11.imagen(vAdy) != nodoNulo && !dicVisitado.pertene(vAdy)){
+                if(grafo.peso(min, vAdy) <  grafo.peso(r11.imagen(vAdy), vAdy)){
+                    r11.modificarImagen(vAdy, min);
+                }else
+                    vAdy = grafo.sigVerticeAdy(min, vAdy);
+            }else if(r11.imagen(vAdy) == nodoNulo && !dicVisitado.pertene(vAdy)){
+                r11.modificarImagen(vAdy, min);
+            }else
+                vAdy = grafo.sigVerticeAdy(min, vAdy);
+        }
+    }
 }
 
 void Algoritmos::vendedor(GNDGD grafo){//Diccionario
