@@ -154,7 +154,7 @@ void DicLSE<V>::eliminar(V elemento){
             else
                 iter = iter->sig;
         }
-        NodoDicc<V> n = iter->sig;
+        NodoDicc<V> *n = iter->sig;
         iter->sig = n->sig;
         delete n;
     }

@@ -18,10 +18,13 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 typedef DicLSE<Vertice> DicV;
 typedef R11<Vertice, Vertice> R11V;
 typedef R11<Vertice, int> R11PesoV;
+typedef std::vector<Vertice> vectorV;
+typedef std::vector<int> vectorP;
 #define INFINITO 1000000
 
 #ifndef ALGORITMOS_H
@@ -92,7 +95,10 @@ public:
     //EFE: Usa Busqueda Exhaustiva Pura para solucionar el problema del vendedor.
     //REQ:
     //MOD:
-    void vendedor(GNDGD grafo);
+    void vendedor(GNDGD grafo, Vertice V);
+    
+    void vendedorR(GNDGD grafo, Vertice v1, Vertice v2, DicV visitados, vectorV &solOp, vectorV solAc,
+                    int &solOpt, int solAct, int cantVertF, int &cantSolF);
 
 private:
     static Vertice nodoNulo;
