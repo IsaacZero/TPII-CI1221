@@ -359,22 +359,20 @@ void Algoritmos::vendedorR(GNDGD grafo, Vertice v1, Vertice v2, DicV visitados, 
     }
     Vertice v3 = grafo.primerVerticeAdy(v2);
     if (v3 != nodoNulo && !visitados.pertene(v3)) {
-        cantVertF++;
         this->vendedorR(grafo, v2, v3, visitados, solOp, solAc, solOpt, solAct, cantVertF, cantSolF);
     } else {
         while (visitados.pertene(v3) && v3 != nodoNulo)
             v3 = grafo.sigVerticeAdy(v2, v3);
         if (v3 != nodoNulo)
             this->vendedorR(grafo, v1, v2, visitados, solOp, solAc, solOpt, solAct, cantVertF, cantSolF);
-        else {
-            solAc.pop_back();
-            visitados.eliminar(v2);
-            solAct -= grafo.peso(v1, v2);
-            while (!visitados.pertene(v2) && v2 != nodoNulo){
-                v2 = grafo.sigVerticeAdy(v1, v2);
-                if (v2 != nodoNulo)
-                    this->vendedorR(grafo, v1, v2, visitados, solOp, solAc, solOpt, solAct, cantVertF, cantSolF);
-            }
-        }
+    }
+    cantVertF++;
+    solAc.pop_back();
+    visitados.eliminar(v2);
+    solAct -= grafo.peso(v1, v2);
+    while (!visitados.pertene(v2) && v2 != nodoNulo) {
+        v2 = grafo.sigVerticeAdy(v1, v2);
+        if (v2 != nodoNulo && !visitados.pertene(v2))
+            this->vendedorR(grafo, v1, v2, visitados, solOp, solAc, solOpt, solAct, cantVertF, cantSolF);
     }
 }
