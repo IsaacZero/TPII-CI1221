@@ -31,7 +31,166 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    GNDGD grafo;
+    int desicion = 0;
+    bool continuar = true;
+    while(continuar){
+        cout << "MENU DE OPCIONES\n" << endl;
+        cout << "¿Cual Estructura desea usar?\n (Ingrese un numero)" << endl;
+        cout << "1. Grafo Dirigido." << endl;
+        cout << "2. Grafo No Dirigido." << endl;
+        cin >> desicion;
+        switch(desicion){
+            case 1:
+            {
+                GDirigido grafo;
+                GDirigido G2;
+                int desicion2 = 0;
+                bool continuar2 = true;
+                while (continuar2){
+                    cout << "¿Que desea hacer?\n (Ingrese un numero)" << endl;
+                    cout << "1. Aplicar Operadores Básicos." << endl;
+                    cout << "2. Aplicar Algoritmos. (RECUERDE LLENAR EL GRAFO ANTES DE APLICAR ALGORITMOS)" << endl;
+                    cout << "Salir." << endl;
+                    switch(desicion2){
+                        case 1:
+                        {
+                            int desicion3 = 0;
+                            bool continuar3 = true;
+                            while(continuar3){
+                                cout << "¿Que Operador Básico desea aplicar?\n (Ingrese un numero)" << endl;//19
+                                cout << "1. Grafo Dirigido." << endl;
+                                cout << "2. Grafo No Dirigido." << endl;
+                                cout << "3. Grafo No Dirigido." << endl;
+                                cout << "4. Grafo No Dirigido." << endl;
+                                cout << "5. Grafo No Dirigido." << endl;
+                                cout << "6. Grafo No Dirigido." << endl;
+                                cout << "7. Grafo No Dirigido." << endl;
+                                cout << "8. Grafo No Dirigido." << endl;
+                                cout << "9. Grafo No Dirigido." << endl;
+                                cout << "10. Grafo No Dirigido." << endl;
+                                cout << "11. Grafo No Dirigido." << endl;
+                                cout << "12. Grafo No Dirigido." << endl;
+                                cout << "13. Grafo No Dirigido." << endl;
+                                cout << "14. Grafo No Dirigido." << endl;
+                                cout << "15. Grafo No Dirigido." << endl;
+                                cout << "16. Grafo No Dirigido." << endl;
+                                cout << "17. Grafo No Dirigido." << endl;
+                                cout << "18. Grafo No Dirigido." << endl;
+                                cout << "19. Grafo No Dirigido." << endl;
+                                cin >> desicion3;
+                                switch(desicion3){
+                                    case 1:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 2:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 3:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 4:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 5:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 6:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 7:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 8:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 9:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 10:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 11:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 12:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 13:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 14:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 15:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 16:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 17:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 18:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    case 19:
+                                    {
+                                        
+                                    }
+                                    break;
+                                    
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            break;
+            case 2:
+            {
+                
+            }
+            break;
+        }
+    }
+    /*GNDGD grafo;
     Algoritmos algoritmos;
     grafo.crear();
     vectorV vector;
@@ -70,7 +229,7 @@ int main(int argc, char** argv) {
     archivoSalida << "Tiempo total OP = " << acmlpt << endl;
     archivoSalida << "Tiempo algo = " << secs << endl;
     grafo.destruir();
-    //G2.destruir();
+    //G2.destruir();*/
     return 0;
 }
 

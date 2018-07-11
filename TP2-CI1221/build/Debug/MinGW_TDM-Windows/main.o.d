@@ -1,1 +1,14 @@
-build/Debug/MinGW_TDM-Windows/main.o: main.cpp
+build/Debug/MinGW_TDM-Windows/main.o: main.cpp Algoritmos.h GDirigido.h \
+ GDListaAdy.h GNDGD.h DicLSE.h R11.h
+
+Algoritmos.h:
+
+GDirigido.h:
+
+GDListaAdy.h:
+
+GNDGD.h:
+
+DicLSE.h:
+
+R11.h:
