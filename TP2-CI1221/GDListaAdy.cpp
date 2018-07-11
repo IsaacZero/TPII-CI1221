@@ -169,12 +169,12 @@ GDListaAdy::Nodo* GDListaAdy::primerVerticeAdy(Nodo* v1){
 
 GDListaAdy::Nodo* GDListaAdy::sigVerticeAdy(Nodo* v1, Nodo* v2){
     Nodo::ListaAdy::NodoAdy *nAdy = v1->adyacencia.start;
-    Nodo *nSig;
+    Nodo *nSig = nodoNulo;
     if (nAdy->vertice == v2)
         nSig = nAdy->sig->vertice;
     else{
         bool found = false;
-        while(!found){
+        while(!found && nAdy->sig != nullptr){
             if(nAdy->vertice == v2){
                 nSig = nAdy->sig->vertice;
                 found = true;

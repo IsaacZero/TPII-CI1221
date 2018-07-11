@@ -27,7 +27,7 @@ Algoritmos::~Algoritmos() {
 
 //ALGORITMOS GRAFO DIRIGIDO
 
-Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido grafo) {
+Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido& grafo) {
     bool found = false;
     Vertice v = grafo.primerVertice();
     while (v != nodoNulo && !found) {
@@ -41,7 +41,7 @@ Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido grafo) {
     return v;
 }
 
-Vertice Algoritmos::min(DicV dicc, R11PesoV r11, GDirigido grafo) {
+Vertice Algoritmos::min(DicV dicc, R11PesoV r11, GDirigido& grafo) {
     Vertice iter = grafo.primerVertice();
     Vertice min = iter;
     while (iter != nodoNulo) {
@@ -54,7 +54,7 @@ Vertice Algoritmos::min(DicV dicc, R11PesoV r11, GDirigido grafo) {
     return min;
 }
 
-void Algoritmos::dijkstra(Vertice V, GDirigido grafo) {//R11
+void Algoritmos::dijkstra(Vertice V, GDirigido& grafo) {//R11
     R11PesoV r11;
     r11.crear();
     Vertice vIter = grafo.primerVertice();
@@ -76,21 +76,23 @@ void Algoritmos::dijkstra(Vertice V, GDirigido grafo) {//R11
     }
 
     for (int i = 1; i < grafo.numVertices() - 1; i++) {
-        //Cambiar todo que no era asi:v
         vIter = this->min(diccVisitados, r11, grafo);
         diccVisitados.agregar(vIter);
         vAdy = grafo.primerVerticeAdy(vIter);
         while (vAdy != nodoNulo) {
             if (!diccVisitados.pertene(vAdy) && (r11.imagen(vIter) + grafo.peso(vIter, vAdy) < r11.imagen(vAdy)))
                 r11.modificarImagen(vAdy, r11.imagen(vIter) + grafo.peso(vIter, vAdy));
-            else
-                vAdy = grafo.sigVerticeAdy(vIter, vAdy);
+            vAdy = grafo.sigVerticeAdy(vIter, vAdy);
         }
     }
-    //Imprimir
+    vIter = grafo.primerVertice();
+    for(int i = 0; i < grafo.numVertices(); i++){
+        cout << "Vertice " <<grafo.etiqueta(vIter) << " Con Peso: " << r11.imagen(vIter) << endl;
+        vIter = grafo.siguienteVertice(vIter);
+    }
 }
 
-void Algoritmos::floyd(GDirigido grafo) {
+void Algoritmos::floyd(GDirigido& grafo) {
     int matriz[grafo.numVertices()][grafo.numVertices()];
     R11PesoV r11;
     Vertice v = grafo.primerVertice();
@@ -148,7 +150,7 @@ void Algoritmos::floyd(GDirigido grafo) {
     }
 }
 
-void Algoritmos::listarRPP(GDirigido grafo) {
+void Algoritmos::listarRPP(GDirigido& grafo) {
     if (!grafo.vacio()) {
         Vertice v = grafo.primerVertice();
         DicV dicV;
@@ -162,7 +164,7 @@ void Algoritmos::listarRPP(GDirigido grafo) {
     }
 }
 
-void Algoritmos::listarRPPR(Vertice v, DicV& dicV, GDirigido grafo) {
+void Algoritmos::listarRPPR(Vertice v, DicV& dicV, GDirigido& grafo) {
     dicV.agregar(v);
     cout << v->elemento << endl;
     Vertice va = grafo.primerVerticeAdy(v);
@@ -197,7 +199,7 @@ void Algoritmos::elimVertNA(Vertice v, GDirigido& grafo) {
     grafo.eliminarVertice(v);
 }
 
-void Algoritmos::copiar(GDirigido G1, GDirigido& G2) {
+void Algoritmos::copiar(GDirigido& G1, GDirigido& G2) {
     //Relaciones 1:1 con los vertices iguales de G1 y G2 similar a iguales.
     if (G1.numVertices() == 0)
         G2.vaciar();
@@ -218,13 +220,14 @@ void Algoritmos::copiar(GDirigido G1, GDirigido& G2) {
             va1 = G1.primerVerticeAdy(v1);
             while (va1 != nodoNulo) {
                 G2.agregarArista(G1.peso(v1, va1), R11vert.imagen(v1), R11vert.imagen(va1));
+                va1 = G1.sigVerticeAdy(v1, va1);
             }
             v1 = G1.siguienteVertice(v1);
         }
     }
 }
 
-bool Algoritmos::iguales(GDirigido G1, GDirigido G2) {
+bool Algoritmos::iguales(GDirigido& G1, GDirigido& G2) {
     bool equal = true;
     if (G1.numVertices() != G2.numVertices())
         equal = false;
@@ -268,7 +271,7 @@ bool Algoritmos::iguales(GDirigido G1, GDirigido G2) {
 
 //ALGORITMOS GRAFO NO DIRIGIDO
 
-void Algoritmos::prim(GNDGD grafo) {//R11
+void Algoritmos::prim(GNDGD& grafo) {//R11
     R11V r11;
     DicV dicVisitado;
     r11.crear();
@@ -279,12 +282,9 @@ void Algoritmos::prim(GNDGD grafo) {//R11
     while (vIter != nodoNulo) {
         if (grafo.etiqueta(vIter) < grafo.etiqueta(min)) {
             min = vIter;
-            r11.agregarRelacion(vIter, nodoNulo);
-            vIter = grafo.siguienteVertice(vIter);
-        } else {
-            vIter = grafo.siguienteVertice(vIter);
-            r11.agregarRelacion(vIter, nodoNulo);
-        }
+            }
+        r11.agregarRelacion(vIter, nodoNulo);
+        vIter = grafo.siguienteVertice(vIter);
     }
     dicVisitado.agregar(min);
     vIter = grafo.primerVerticeAdy(min);
@@ -300,11 +300,9 @@ void Algoritmos::prim(GNDGD grafo) {//R11
             if (r11.imagen(vIter) != nodoNulo && !dicVisitado.pertene(vIter)) {
                 if (grafo.peso(r11.imagen(vIter), vIter) < grafo.peso(r11.imagen(min), min)) {
                     min = vIter;
-                    vIter = grafo.siguienteVertice(vIter);
-                } else
-                    vIter = grafo.siguienteVertice(vIter);
-            } else
-                vIter = grafo.siguienteVertice(vIter);
+                }
+            }
+            vIter = grafo.siguienteVertice(vIter);
         }
         dicVisitado.agregar(min);
         vAdy = grafo.primerVerticeAdy(min);
@@ -312,20 +310,20 @@ void Algoritmos::prim(GNDGD grafo) {//R11
             if (r11.imagen(vAdy) != nodoNulo && !dicVisitado.pertene(vAdy)) {
                 if (grafo.peso(min, vAdy) < grafo.peso(r11.imagen(vAdy), vAdy)) {
                     r11.modificarImagen(vAdy, min);
-                } else
-                    vAdy = grafo.sigVerticeAdy(min, vAdy);
+                }
             } else if (r11.imagen(vAdy) == nodoNulo && !dicVisitado.pertene(vAdy)) {
                 r11.modificarImagen(vAdy, min);
-            } else
-                vAdy = grafo.sigVerticeAdy(min, vAdy);
+            }
+            vAdy = grafo.sigVerticeAdy(min, vAdy);
         }
     }
 }
 
-void Algoritmos::vendedor(GNDGD grafo, Vertice v) {//Diccionario
+void Algoritmos::vendedor(GNDGD& grafo, Vertice v) {//Diccionario
     Vertice v2 = grafo.primerVerticeAdy(v);
     if (v2 != nodoNulo) {
         DicV visitados;
+        visitados.crear();
         vectorV solucionOp;
         vectorV solActual;
         Vertice v2 = grafo.primerVerticeAdy(v);
@@ -343,7 +341,7 @@ void Algoritmos::vendedor(GNDGD grafo, Vertice v) {//Diccionario
     }
 }
 
-void Algoritmos::vendedorR(GNDGD grafo, Vertice v1, Vertice v2, DicV visitados, vectorV& solOp, vectorV solAc,
+void Algoritmos::vendedorR(GNDGD& grafo, Vertice v1, Vertice v2, DicV& visitados, vectorV& solOp, vectorV solAc,
         int& solOpt, int solAct, int cantVertF, int& cantSolF) {
     solAc.push_back(v2);
     visitados.agregar(v2);
