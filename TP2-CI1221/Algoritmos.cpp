@@ -36,8 +36,18 @@ Vertice Algoritmos::buscarEtiq(int etiqueta, GDirigido& grafo) {
         else
             v = grafo.siguienteVertice(v);
     }
-    if (!found)
-        v = nodoNulo;
+    return v;
+}
+
+Vertice Algoritmos::buscarEtiqND(int etiqueta, GNDGD& grafo) {
+    bool found = false;
+    Vertice v = grafo.primerVertice();
+    while (v != nodoNulo && !found) {
+        if (grafo.etiqueta(v) == etiqueta)
+            found = true;
+        else
+            v = grafo.siguienteVertice(v);
+    }
     return v;
 }
 
@@ -317,6 +327,12 @@ void Algoritmos::prim(GNDGD& grafo) {//R11
             vAdy = grafo.sigVerticeAdy(min, vAdy);
         }
     }
+    vIter = grafo.primerVertice();
+    cout << "Vertice Padre" << "\t" << " Vertice: " << "\t" << " Peso" << endl;
+    for(int i = 0; i < grafo.numVertices(); i++){
+        cout << grafo.etiqueta(r11.imagen(vIter)) << "\t" << grafo.etiqueta(vIter) << "\t" << grafo.peso(vIter, r11.imagen(vIter)) << endl;
+        vIter = grafo.siguienteVertice(vIter);
+    }
 }
 
 void Algoritmos::vendedor(GNDGD& grafo, Vertice v) {//Diccionario
@@ -336,6 +352,17 @@ void Algoritmos::vendedor(GNDGD& grafo, Vertice v) {//Diccionario
         visitados.agregar(v);
         solActual.push_back(v);
         this->vendedorR(grafo, v, v2, visitados, solucionOp, solActual, solOpt, solAct, cantVert, cantSolF);
+        if(cantSolF == 0)
+            cout << "Hay un Vértice Aislado y el problema no tiene solución" << endl;
+        else{
+            cout << "La Cantidad de Soluciones Factibles es " << cantSolF << endl;
+            cout << "La Solucion Optima es:" << endl;
+            for(int i = 0; i < solucionOp.size(); i++){
+                cout << grafo.etiqueta(solucionOp[i]) << "->";
+            }
+            cout << endl;
+            cout << "Con Peso: " << solOpt << endl;
+        }
     } else {
         cout << "Hay un Vértice Aislado y el problema no tiene solución" << endl;
     }

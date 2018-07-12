@@ -45,6 +45,11 @@ public:
     //MOD:
     Vertice buscarEtiq(int etiqueta, GDirigido &grafo);
     
+    //EFE: Retorna el vertice con esa etiqueta o en caso de no encrontrarlo un nodoNulo.
+    //REQ:
+    //MOD:
+    Vertice buscarEtiqND(int etiqueta, GNDGD &grafo);
+    
     //EFE: Retorna el vertice adyacente con menor peso.
     //REQ: V incluido en el grafo.
     //MOD: 
